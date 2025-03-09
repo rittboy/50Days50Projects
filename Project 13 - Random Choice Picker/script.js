@@ -1,6 +1,5 @@
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
-
 textarea.focus();
 
 textarea.addEventListener('keyup', (e) =>{
@@ -8,17 +7,19 @@ textarea.addEventListener('keyup', (e) =>{
 
     if(e.key === 'Enter'){
         setTimeout(() =>{
-            e.target.value = '';
-        }, 10)
+            e.target.value = ''
+        },10);
+
         randomSelect();
     }
-})
+});
 
 function createTags(input){
-    const tags = input.split(',').filter(tag => tag.trim() !=='').map(tag =>tag.trim());
+    const tags = input.split(',').filter(tag => tag.trim() !== '').map(tag => tag.trim());
+
     tagsEl.innerHTML = '';
 
-    tags.forEach(tag =>{
+    tags.forEach( tag =>{
         const tagEl = document.createElement('span');
         tagEl.classList.add('tag');
         tagEl.innerText = tag;
@@ -27,27 +28,30 @@ function createTags(input){
 }
 
 function randomSelect(){
-    const time = 30;
+    const times = 30;
+
     const interval = setInterval(() =>{
         const randomTag = pickRandomTag();
-        highlightTag(randomTag);
 
-        setTimeout(() =>{
-            unhighlightTag(randomTag);
-        },  100)
+        if(randomTag !== undefined){
+            highlightTag(randomTag);
+
+            setTimeout(() =>{
+                unHighlightTag(randomTag);
+            }, 100)
+        }
     }, 100);
 
     setTimeout(() =>{
-        clearInterval(interval)
+        clearInterval(interval);
 
         setTimeout(() =>{
             const randomTag = pickRandomTag();
 
             highlightTag(randomTag);
-        }, 100)
-    }, times * 100)
+        }, 100);
+    }, times * 100);
 }
-
 function pickRandomTag(){
     const tags = document.querySelectorAll('.tag');
     return tags[Math.floor(Math.random() * tags.length)];
@@ -56,6 +60,7 @@ function pickRandomTag(){
 function highlightTag(tag){
     tag.classList.add('highlight');
 }
-function unhighlightTag(tag){
+
+function unHighlightTag(tag){
     tag.classList.remove('highlight');
 }
