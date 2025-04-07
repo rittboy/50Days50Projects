@@ -13,3 +13,9 @@ body{
     height: 100vh;
 
 }
+.toggle-container{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    width: 200px;
+}
