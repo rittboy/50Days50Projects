@@ -1,5 +1,6 @@
 const addBtn = document.getElementById('add');
 const notes = JSON.parse(localStorage.getItem('notes'));
+
 if(notes){
     notes.forEach(note => addNewNote(note));
 }
@@ -14,18 +15,16 @@ function addNewNote(text = ''){
         <button class="edit"><i class="fas fa-edit"></i></button>
         <button class="delete"><i class="fas fa-trash-alt"></i></button>
     </div>
-    <div class="main ${text ? "" : "hidden"}</div>
-    <textarea class="${text ? "hidden" : ""}"></div>
-    `
-
+    <div class="main ${text ? "" : "hidden"}"></div>
+    <textarea class="${text ? "hidden" : ""}"></textarea>`
     const editBtn = note.querySelector('.edit');
-    const deleteBtn = note.querySelector('.delete');
+    const delteBtn = note.querySelector('.delete');
     const main = note.querySelector('.main');
     const textArea = note.querySelector('textarea');
+
     textArea.value = text;
     main.innerHTML = marked(text);
-
-    deleteBtn.addEventListener('click', () =>{
+    delteBtn.addEventListener('click', () =>{
         note.remove();
 
         updateLS();
@@ -41,10 +40,8 @@ function addNewNote(text = ''){
 
         updateLS();
     })
-
     document.body.appendChild(note);
 }
-
 function updateLS(){
     const notesText = document.querySelectorAll('textarea');
 
